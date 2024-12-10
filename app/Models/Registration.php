@@ -7,24 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Car extends Model
+class Registration extends Model
 {
     use HasFactory;
 
-    protected $table = 'car';
+    protected $table = 'registration';
 
     protected $fillable = [
-        'brand',
-        'model',
-        'category',
-        'coefficient',
-        'year',
         'user_id',
+        'event_id',
+        'start_number',
     ];
 
-    public function user(): BelongsTo
+    public function registrations(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function event(): BelongsTo
+    {
+        return $this->belongsTo(Event::class);
     }
 
 }

@@ -67,7 +67,7 @@ class User extends Authenticatable
         return $this->belongsTo(Club::class);
     }
 
-    public function users(): HasOne
+    public function car(): HasOne
     {
         return $this->hasOne(Car::class);
     }
