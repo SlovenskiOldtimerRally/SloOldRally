@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LandingController::class, 'index'],)->name('landing.index');
+Route::get('filter', [LandingController::class, 'filter'],)->name('landing.filter');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
