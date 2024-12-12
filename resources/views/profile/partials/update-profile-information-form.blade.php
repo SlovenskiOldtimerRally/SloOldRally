@@ -4,6 +4,18 @@
             {{ __('Profile Information') }}
         </h2>
 
+        <div class="mt-2">
+
+            <x-input-label for="club_id" :value="__('Klub')" />
+            <select disabled name="club" id="club" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" required>
+                <option value="{{ $user->club_id }}">{{ $user->club->name }}</option>
+
+            </select>
+        </div>
+
+        <hr class="mt-2">
+
+
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Update your account's profile information and email address.") }}
         </p>

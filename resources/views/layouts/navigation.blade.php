@@ -17,7 +17,7 @@
 <nav class="bg-gray-800 text-white py-4">
     <div class="container mx-auto px-4 flex justify-between items-center">
         <div class="flex items-center space-x-4">
-            <a href="#" class="text-xl font-bold">Oldtimer Rally</a>
+            <a href="{{ route('landing.index') }}" class="text-xl font-bold">Oldtimer Rally</a>
             <a href="{{ route('dashboard') }}" class="bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Dogodki</a>
         </div>
         <ul class="hidden md:flex space-x-6">
@@ -29,7 +29,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                    <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg">
+                    <div style="z-index: 9999" x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg">
                         <a href="{{ route('profile.edit') }}" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

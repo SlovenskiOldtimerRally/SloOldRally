@@ -22,7 +22,7 @@
             <!-- Email Address -->
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input id="email" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
+                <input id="email" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" type="email" name="email" value="{{old('email')}}" required autofocus autocomplete="username">
                 <div class="text-red-600 text-sm mt-1">{{ $errors->first('email') }}</div>
             </div>
 
