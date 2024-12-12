@@ -1,13 +1,15 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+        <h2 class=" mt-2 text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Profile Information') }}
         </h2>
 
         <div class="mt-2">
 
             <x-input-label for="club_id" :value="__('Klub')" />
+
             <select disabled name="club" id="club" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" required>
+
                 <option value="{{ $user->club_id }}">{{ $user->club->name }}</option>
 
             </select>
