@@ -40,5 +40,4 @@ class LandingController extends Controller
         'selectedClubId' => $clubId // Pass selected club ID to the view
     ]);
 }
-
 }

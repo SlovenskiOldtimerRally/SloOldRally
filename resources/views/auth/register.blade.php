@@ -1,52 +1,62 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Slovenski Oldtimer Rally</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="min-h-screen flex flex-col justify-center items-center">
+        <!-- Registration Form -->
+        <form method="POST" action="{{ route('register') }}" class="bg-white shadow-md rounded-lg px-8 py-6 w-full max-w-md">
+            @csrf
+            <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Registracija</h1>
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+            <!-- Name -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Ime</label>
+                <input id="name" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" type="text" name="name" :value="old('name')" required autofocus autocomplete="name">
+                <div class="text-red-600 text-sm mt-1">{{ $errors->first('name') }}</div>
+            </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+            <!-- Email Address -->
+            <div class="mt-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input id="email" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" type="email" name="email" :value="old('email')" required autocomplete="username">
+                <div class="text-red-600 text-sm mt-1">{{ $errors->first('email') }}</div>
+            </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <!-- Password -->
+            <div class="mt-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Geslo</label>
+                <input id="password" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" type="password" name="password" required autocomplete="new-password">
+                <div class="text-red-600 text-sm mt-1">{{ $errors->first('password') }}</div>
+            </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+            <!-- Confirm Password -->
+            <div class="mt-4">
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Potrdite geslo</label>
+                <input id="password_confirmation" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" type="password" name="password_confirmation" required autocomplete="new-password">
+                <div class="text-red-600 text-sm mt-1">{{ $errors->first('password_confirmation') }}</div>
+            </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            <!-- Actions -->
+            <div class="flex items-center justify-between mt-6">
+                <a class="text-sm text-yellow-600 hover:text-yellow-700 underline" href="{{ route('login') }}">
+                    Že imate račun?
+                </a>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg">
+                    Registracija
+                </button>
+            </div>
+        </form>
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+        <!-- Footer Link -->
+        <p class="mt-4 text-sm text-gray-600">
+            Želite izvedeti več? <a href="/" class="text-yellow-600 hover:text-yellow-700 underline">Nazaj na glavno stran</a>
+        </p>
+    </div>
+</body>
+</html>
