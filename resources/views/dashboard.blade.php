@@ -1,5 +1,9 @@
 <x-app-layout>
-    <h2 class="text-3xl font-bold text-center mb-8 my-5">Dogodki</h2>
+    <x-slot name="header">
+        <h2 class="font-semibold text-3xl text-gray-800 dark:text-gray-200  text-center">
+            {{ __('Dogodki') }}
+        </h2>
+    </x-slot>
 
     <!-- User's Applied Events Section -->
     <section class="mb-10">
