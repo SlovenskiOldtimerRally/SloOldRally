@@ -16,8 +16,7 @@
                     <h4 class="text-xl font-bold mb-2">{{ $event->title }}</h4>
                     <p class="text-gray-700 mb-2">Datum: {{ $event->date }}</p>
                     <p class="text-gray-700">Lokacija: {{ $event->location }}</p>
-                    {{-- POPRAVI DA IMA KLUB ADMIN DRUGAČEN DETAIL VIEW KOT NAVADEN UPORABNIK --}}
-                    <a href="{{ route('event-detail', $event->id) }}" class="inline-block mt-4 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg">Podrobnosti</a>
+                    <a href="{{ route('club.event', $event->id) }}" class="inline-block mt-4 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg">Podrobnosti</a>
                 </div>
             </div>
             @empty

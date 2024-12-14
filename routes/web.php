@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventRegistrationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\denyClubAdmin;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\isClubAdmin;
@@ -23,17 +24,21 @@ Route::get('/register', function(){
 
 
 
-Route::get('dashboard', [DashboardController::class, 'userEvents'],)->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('dashboard', [DashboardController::class, 'userEvents'],)->middleware(['auth', 'verified', denyClubAdmin::class])->name('dashboard');
 Route::get('event/{event}', [DashboardController::class, 'event_detail'],)->name('event-detail');
 
 Route::middleware([isClubAdmin::class])->group(function () {
     Route::get('club-dashboard', [ClubDashboardController::class, 'createdEvents'])->name('club.dashboard');
     Route::get('club-dashboard/create-event', [ClubDashboardController::class, 'createEvent'])->name('club.create-event');
+    Route::get('club-dashboard/event/{event}', [ClubDashboardController::class, 'event_detail'])->name('club.event');
+    Route::get('club-dashboard/event/{event}/edit', [ClubDashboardController::class, 'editEvent'])->name('club.edit-event');
+    Route::put('club-dashboard/event/{event}/update', [ClubDashboardController::class, 'edit_event'])->name('club.edit-event.edit');
     Route::post('club-dashboard/create-event/create', [ClubDashboardController::class, 'create_event'])->name('club.create-event.create');
+    Route::delete('club-dashboard/event/{event}/delete', [ClubDashboardController::class, 'delete_event'])->name('club.delete-event');
 });
 
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', denyClubAdmin::class])->group(function () {
     Route::post('dashboard/{event}/register', [EventRegistrationController::class, 'create_registration'])->name('event.register');
     Route::delete('dashboard/{event}/register-delete', [EventRegistrationController::class, 'delete_registration'])->name('event.register.delete');
 });

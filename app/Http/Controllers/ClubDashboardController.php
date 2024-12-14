@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Rally;
+use App\Models\Registration;
 use Illuminate\Support\Facades\Auth;
 
 class ClubDashboardController extends Controller
@@ -35,7 +36,7 @@ class ClubDashboardController extends Controller
             'date' => 'required|date|after:tomorrow',
             'time' => 'required',
             'location' => 'required|max:240',
-            'info' => 'max:240',
+            'info' => 'required|max:240',
             'event-type' => 'required'
         ]);
 
@@ -66,6 +67,58 @@ class ClubDashboardController extends Controller
         }
 
         return redirect()->route('club.dashboard');
+    }
+
+    public function event_detail($event_id){
+
+        $registrations = Registration::where('event_id', $event_id)->get();
+
+        return view('club.event-detail', [
+            'event' => Event::with('club')->where('id', $event_id)->first(),
+            'users' => $registrations,
+        ]);
+    }
+
+    public function delete_event($event_id){
+
+        $userId = Auth::id();
+        $event = Event::where('user_id', $userId)->where('id', $event_id)->first();
+
+        $event->delete();
+        return redirect()->route('club.dashboard')->with('success', 'Dogodek je bil izbrisan uspešno!');
+    }
+
+    public function editEvent($event_id){
+
+        return view('club.edit-event-form', [
+            'event' => Event::with('club')->where('id', $event_id)->first()
+        ]);
+    }
+
+    public function edit_event($event_id){
+
+        $userId = Auth::id();
+
+        request()->validate([
+                    'title' => 'required|min:5|max:21',
+                    'date' => 'required|date|after:tomorrow',
+                    'time' => 'required',
+                    'location' => 'required|max:240',
+                    'info' => 'required|max:240',
+                ]);
+
+        $event = Event::where('user_id', $userId)->where('id', $event_id)->first();
+
+
+        $event->title = request()->get('title','');
+        $event->date = request()->get('date','');
+        $event->time = request()->get('time','');
+        $event->location = request()->get('location','');
+        $event->info = request()->get('info','');
+
+        $event->save();
+
+        return redirect()->route('club.event', $event->id)->with('success', 'Posodobitev je bila uspešna!');
     }
 
 
