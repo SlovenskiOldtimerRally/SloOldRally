@@ -4,27 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Car extends Model
 {
     use HasFactory;
 
-    protected $table = 'car';
-
     protected $fillable = [
         'brand',
         'model',
         'category',
-        'coefficient',
         'year',
+        'coefficient',
         'user_id',
     ];
 
-    public function user(): BelongsTo
+    // Relationship to the User model
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
-
 }
