@@ -37,7 +37,14 @@
                     <div class="bg-white shadow-lg rounded-lg overflow-hidden mx-4">
                         <div class="p-4">
                             <h4 class="text-xl font-bold mb-2">{{ $user->user->name }}</h4>
-                            <p class="text-gray-700">neki: {{ $user->id }}</p>
+                            @if ($event->rally_id != NULL)
+                                <p class="text-gray-700">Štartna številka: {{ $user->start_number }}</p>
+                                <p class="text-gray-700">Točnostna vožnja razlika: {{ $user->punctuality_drive_timeDiff }}</p>
+                                <p class="text-gray-700">Odbitek spretnostne vožnje: {{ $user->skill_drive_penalty }}</p>
+                                <p class="text-gray-700">Skupni odbitek: {{ $user->penalty }}</p>
+                                <p class="text-gray-700">Točke: {{ $user->points }}</p>
+                                <p class="text-gray-700">Mesto: {{ $user->ranking }}</p>
+                            @endif
                         </div>
                     </div>
                     @empty
