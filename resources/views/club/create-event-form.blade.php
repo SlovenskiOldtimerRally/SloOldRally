@@ -63,7 +63,7 @@
 
         <div>
             <x-input-label for="info" :value="__('Dodatne informacije')" />
-            <textarea id="info" name="info" rows="3" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg"></textarea>
+            <textarea required id="info" name="info" rows="3" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg"></textarea>
         {{--    <input id="info" name="info" type="text" rows="3" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" :value="old('email', $user->email)" /> --}}
             <x-input-error class="mt-2" :messages="$errors->get('info')" />
         </div>

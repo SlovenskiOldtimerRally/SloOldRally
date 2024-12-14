@@ -30,7 +30,11 @@ Route::get('event/{event}', [DashboardController::class, 'event_detail'],)->name
 Route::middleware([isClubAdmin::class])->group(function () {
     Route::get('club-dashboard', [ClubDashboardController::class, 'createdEvents'])->name('club.dashboard');
     Route::get('club-dashboard/create-event', [ClubDashboardController::class, 'createEvent'])->name('club.create-event');
+    Route::get('club-dashboard/event/{event}', [ClubDashboardController::class, 'event_detail'])->name('club.event');
+    Route::get('club-dashboard/event/{event}/edit', [ClubDashboardController::class, 'editEvent'])->name('club.edit-event');
+    Route::put('club-dashboard/event/{event}/update', [ClubDashboardController::class, 'edit_event'])->name('club.edit-event.edit');
     Route::post('club-dashboard/create-event/create', [ClubDashboardController::class, 'create_event'])->name('club.create-event.create');
+    Route::delete('club-dashboard/event/{event}/delete', [ClubDashboardController::class, 'delete_event'])->name('club.delete-event');
 });
 
 
