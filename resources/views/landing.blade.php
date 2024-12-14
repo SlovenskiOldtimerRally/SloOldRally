@@ -1,38 +1,6 @@
 <x-app-layout>
-    <!-- Navigation Bar -->
-    {{-- <nav class="bg-gray-800 text-white py-4">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <a href="#" class="text-xl font-bold">Oldtimer Rally</a>
-                <a href="{{ route('dashboard') }}" class="bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Dogodki</a>
-            </div>
-    
-            <ul class="hidden md:flex space-x-6">
-                @guest
-                    <li><a href="{{ route('login') }}"
-                            class="{{ (Route::is('login')) ? 'active' : ''}} bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg">Prijava</a></li>
-                    <li><a href="{{ route('register') }}"
-                            class="{{ (Route::is('register')) ? 'active' : '' }} bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Registracija</a></li>
-                @endguest
-    
-                @auth
-                    <li class="relative group">
-                        <button class="bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded-lg">
-                            {{ Auth::user()->name }}
-                        </button>
-                        <div class="absolute right-0 mt-2 hidden group-hover:block bg-white text-gray-800 rounded-lg shadow-lg py-2">
-                            <a href="{{ route('profile.edit') }}" class="block px-4 py-2 hover:bg-gray-200">Profil</a>
-                            <form method="POST" action="{{ route('logout') }}" class="block">
-                                @csrf
-                                <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-200">Odjava</button>
-                            </form>
-                        </div>
-                    </li>
-                @endauth
-            </ul>
-        </div>
-    </nav> --}}
-    
+
+
 
     <!-- Hero Section -->
     <section id="hero" class="relative bg-gray-700 text-white">
@@ -71,6 +39,8 @@
                         <p>{{ $event->club->name }}</p>
                         <p>{{ $event->date }} {{ $event->time }}</p>
                         <p>{{ $event->location }}</p>
+                        <a href="{{ route('event-detail', $event->id) }}" class="inline-block mt-4 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg">Podrobnosti</a>
+
                     </div>
                 @empty
                     <p class="text-center">Ni dogodkov za izbran klub.</p>
@@ -79,7 +49,7 @@
         </div>
     </section>
 
-    
+
     <!-- Gallery Section -->
     <section id="gallery" class="py-12 bg-white">
         <div class="container mx-auto px-4">
@@ -95,10 +65,4 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    {{-- <footer class="bg-gray-800 text-white py-4">
-        <div class="container mx-auto px-4 text-center">
-            <p>© 2024 Slovenski Oldtimer Rally. Vse pravice pridržane.</p>
-        </div>
-    </footer> --}}
 </x-app-layout>

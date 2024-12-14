@@ -18,7 +18,18 @@
     <div class="container mx-auto px-4 flex justify-between items-center">
         <div class="flex items-center space-x-4">
             <a href="{{ route('landing.index') }}" class="text-xl font-bold">Oldtimer Rally</a>
-            <a href="{{ route('dashboard') }}" class="bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Dogodki</a>
+
+
+            @auth
+                @if (auth()->user()->isClubAdmin)
+                    <a href="{{ route('club.dashboard') }}" class="bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Dogodki</a>
+                    <a href="{{ route('club.create-event') }}" class="bg-yellow-600 hover:bg-yellow-800 text-white py-2 px-4 rounded-lg">Ustvari dogodek</a>
+
+                @else
+                    <a href="{{ route('dashboard') }}" class="bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded-lg">Dogodki</a>
+                @endif
+            @endauth
+
         </div>
         <ul class="hidden md:flex space-x-6">
             @auth
