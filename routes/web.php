@@ -23,8 +23,9 @@ Route::get('/register', function(){
 Route::get('dashboard', [DashboardController::class, 'userEvents'],)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware([isClubAdmin::class])->group(function () {
-    Route::get('club-dashboard', [ClubDashboardController::class, 'createdEvents'],)->name('club.dashboard');
-    Route::get('club-dashboard/create-event', [ClubDashboardController::class, 'createEvent'],)->name('club.create-event');
+    Route::get('club-dashboard', [ClubDashboardController::class, 'createdEvents'])->name('club.dashboard');
+    Route::get('club-dashboard/create-event', [ClubDashboardController::class, 'createEvent'])->name('club.create-event');
+    Route::post('club-dashboard/create-event/create', [ClubDashboardController::class, 'create_event'])->name('club.create-event.create');
 });
 
 

@@ -17,6 +17,11 @@ class Registration extends Model
         'user_id',
         'event_id',
         'start_number',
+        'punctuality_drive_timeDiff',
+        'skill_drive_penalty',
+        'penalty',
+        'points',
+        'ranking',
     ];
 
     public function registrations(): BelongsTo

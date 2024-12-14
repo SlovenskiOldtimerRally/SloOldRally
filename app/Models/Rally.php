@@ -14,11 +14,7 @@ class Rally extends Model
     protected $table = 'rally';
 
     protected $fillable = [
-        'punctuality_drive_timeDiff',
-        'skill_drive_penalty',
-        'penalty',
-        'points',
-        'ranking',
+
     ];
 
 
