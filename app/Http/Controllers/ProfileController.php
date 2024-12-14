@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Car;
 
 class ProfileController extends Controller
 {
@@ -57,4 +58,33 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function show()
+    {
+        $user = User::with('car')->findOrFail(auth()->id());
+
+        return view('profile', compact('user'));
+    }
+
+    public function storeCar(Request $request)
+    {
+        $validated = $request->validate([
+            'brand' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'year' => 'required|integer|min:1900|max:2100',
+            'coefficient' => 'required|numeric|min:0',
+        ]);
+
+        $user = auth()->user();
+        if ($user->car) {
+            $user->car->update($validated);
+        } else {
+            $car = new Car($validated);
+            $user->car()->save($car);
+        }
+
+        return redirect()->route('profile.edit')->with('status', 'Car information saved successfully!');
+    }
+
 }
