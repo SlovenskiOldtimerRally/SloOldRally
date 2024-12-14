@@ -39,31 +39,31 @@
 
         <div>
             <x-input-label for="title" :value="__('Ime dogodka')" />
-            <input id="title" name="title" type="text" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" {{-- :value="old('name', $user->name)" --}} required autofocus />
+            <input id="title" name="title" type="text" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" value="{{old('title')}}" required autofocus />
             <x-input-error class="mt-2" :messages="$errors->get('title')" />
         </div>
 
         <div>
             <x-input-label for="date" :value="__('Datum')" />
-            <input id="date" name="date" type="date" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" {{-- :value="old('email', $user->email)" --}} required />
+            <input id="date" name="date" type="date" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" value="{{old('date')}}" required />
             <x-input-error class="mt-2" :messages="$errors->get('date')" />
         </div>
 
         <div>
             <x-input-label for="time" :value="__('Čas')" />
-            <input id="time" name="time" type="time" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" {{-- :value="old('email', $user->email)" --}} required />
+            <input id="time" name="time" type="time" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" value="{{old('time')}}" required />
             <x-input-error class="mt-2" :messages="$errors->get('time')" />
         </div>
 
         <div>
             <x-input-label for="location" :value="__('Lokacija')" />
-            <input id="location" name="location" type="text" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" {{-- :value="old('email', $user->email)" --}} required />
+            <input id="location" name="location" type="text" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" value="{{old('location')}}" required />
             <x-input-error class="mt-2" :messages="$errors->get('location')" />
         </div>
 
         <div>
             <x-input-label for="info" :value="__('Dodatne informacije')" />
-            <textarea required id="info" name="info" rows="3" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg"></textarea>
+            <textarea required id="info" name="info" rows="3" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg">{{old('info')}}</textarea>
         {{--    <input id="info" name="info" type="text" rows="3" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" :value="old('email', $user->email)" /> --}}
             <x-input-error class="mt-2" :messages="$errors->get('info')" />
         </div>
