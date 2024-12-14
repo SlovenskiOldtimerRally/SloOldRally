@@ -24,7 +24,7 @@ class Registration extends Model
         'ranking',
     ];
 
-    public function registrations(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

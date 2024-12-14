@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Rally;
+use App\Models\Registration;
 use Illuminate\Support\Facades\Auth;
 
 class ClubDashboardController extends Controller
@@ -70,8 +71,11 @@ class ClubDashboardController extends Controller
 
     public function event_detail($event_id){
 
+        $registrations = Registration::where('event_id', $event_id)->get();
+
         return view('club.event-detail', [
-            'event' => Event::with('club')->where('id', $event_id)->first()
+            'event' => Event::with('club')->where('id', $event_id)->first(),
+            'users' => $registrations,
         ]);
     }
 
