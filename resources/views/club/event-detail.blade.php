@@ -29,6 +29,24 @@
             </div>
         </div>
 
+        <div class="mt-2">
+            <div class="container mx-auto px-4">
+                <div class="space-y-4">
+
+                    @forelse ($users as $user)
+                    <div class="bg-white shadow-lg rounded-lg overflow-hidden mx-4">
+                        <div class="p-4">
+                            <h4 class="text-xl font-bold mb-2">{{ $user->user->name }}</h4>
+                            <p class="text-gray-700">neki: {{ $user->id }}</p>
+                        </div>
+                    </div>
+                    @empty
+                        <p class="text-gray-500">Ni prijavljenih</p>
+                    @endforelse
+
+                </div>
+            </div>
+
     </div>
 
 
