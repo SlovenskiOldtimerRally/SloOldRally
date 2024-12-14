@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClubDashboardController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventRegistrationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Auth\Events\Verified;
@@ -20,12 +21,21 @@ Route::get('/register', function(){
 });
 
 
+
+
 Route::get('dashboard', [DashboardController::class, 'userEvents'],)->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('event/{event}', [DashboardController::class, 'event_detail'],)->name('event-detail');
 
 Route::middleware([isClubAdmin::class])->group(function () {
     Route::get('club-dashboard', [ClubDashboardController::class, 'createdEvents'])->name('club.dashboard');
     Route::get('club-dashboard/create-event', [ClubDashboardController::class, 'createEvent'])->name('club.create-event');
     Route::post('club-dashboard/create-event/create', [ClubDashboardController::class, 'create_event'])->name('club.create-event.create');
+});
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('dashboard/{event}/register', [EventRegistrationController::class, 'create_registration'])->name('event.register');
+    Route::delete('dashboard/{event}/register-delete', [EventRegistrationController::class, 'delete_registration'])->name('event.register.delete');
 });
 
 

@@ -11,7 +11,7 @@ class LandingController extends Controller
     //
     public function index()
     {
-        $events = Event::orderBy('created_at', 'DESC');
+        $events = Event::with('club')->orderBy('created_at', 'DESC');
         $clubs = Club::orderBy('name')->get();
         return view('landing', [
             'events' => $events->paginate(5),
