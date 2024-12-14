@@ -17,16 +17,18 @@
                         <p class="text-gray-700">Dodatne informacije: {{ $event->info }}</p>
 
                         @auth
-                            <form method="POST" action="{{ route('event.register.delete', $event->id) }}" class="mt-4">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg">Odjava</button>
-                            </form>
+                            @if(!auth()->user()->isClubAdmin)
+                                <form method="POST" action="{{ route('event.register.delete', $event->id) }}" class="mt-4">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg">Odjava</button>
+                                </form>
 
-                            <form method="POST" action="{{ route('event.register', $event->id) }}" class="mt-4">
-                                @csrf
-                                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Prijava</button>
-                            </form>
+                                <form method="POST" action="{{ route('event.register', $event->id) }}" class="mt-4">
+                                    @csrf
+                                    <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Prijava</button>
+                                </form>
+                            @endif
                         @endauth
                     </div>
 
