@@ -39,11 +39,49 @@
                             <h4 class="text-xl font-bold mb-2">{{ $user->user->name }}</h4>
                             @if ($event->rally_id != NULL)
                                 <p class="text-gray-700">Štartna številka: {{ $user->start_number }}</p>
-                                <p class="text-gray-700">Točnostna vožnja razlika: {{ $user->punctuality_drive_timeDiff }}</p>
-                                <p class="text-gray-700">Odbitek spretnostne vožnje: {{ $user->skill_drive_penalty }}</p>
-                                <p class="text-gray-700">Skupni odbitek: {{ $user->penalty }}</p>
-                                <p class="text-gray-700">Točke: {{ $user->points }}</p>
-                                <p class="text-gray-700">Mesto: {{ $user->ranking }}</p>
+
+
+                                <form method="POST" action="{{ route('club.edit-points', [$event->id, $user->id]) }}" class="bg-white  rounded-lg px-8 py-6 w-full max-w-md">
+                                    @csrf
+                                    @method('put')
+
+                                    <div class="mt-4">
+                                        <label for="punctuality_drive_timeDiff" class="block text-sm font-medium text-gray-700">Točnostna vožnja razlika:</label>
+                                        <input id="punctuality_drive_timeDiff" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" step="2" type="time" name="punctuality_drive_timeDiff" value="{{$user->punctuality_drive_timeDiff}}" autocomplete="punctuality_drive_timeDiff">
+                                        <div class="text-red-600 text-sm mt-1">{{ $errors->first('punctuality_drive_timeDiff') }}</div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <label for="skill_drive_penalty" class="block text-sm font-medium text-gray-700">Odbitek spretnostne vožnje:</label>
+                                        <input id="skill_drive_penalty" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" type="number" name="skill_drive_penalty" value="{{$user->skill_drive_penalty}}"  autocomplete="skill_drive_penalty">
+                                        <div class="text-red-600 text-sm mt-1">{{ $errors->first('skill_drive_penalty') }}</div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <label for="penalty" class="block text-sm font-medium text-gray-700">Skupni odbitek:</label>
+                                        <input id="penalty" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" type="number" name="penalty" value="{{$user->penalty}}"  autocomplete="penalty">
+                                        <div class="text-red-600 text-sm mt-1">{{ $errors->first('penalty') }}</div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <label for="points" class="block text-sm font-medium text-gray-700">Točke:</label>
+                                        <input id="points" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" type="number" name="points" value="{{$user->points}}" autocomplete="points">
+                                        <div class="text-red-600 text-sm mt-1">{{ $errors->first('penalty') }}</div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <label for="ranking" class="block text-sm font-medium text-gray-700">Mesto:</label>
+                                        <input id="ranking" class="block mt-1 w-full p-2 border border-gray-300 rounded-lg" type="number" name="ranking" value="{{$user->ranking}}"  autocomplete="ranking">
+                                        <div class="text-red-600 text-sm mt-1">{{ $errors->first('ranking') }}</div>
+                                    </div>
+
+                                    <!-- Actions -->
+                                    <div class="flex items-center justify-between mt-6">
+                                        <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg">
+                                            Posodobi
+                                        </button>
+                                    </div>
+                                </form>
                             @endif
                         </div>
                     </div>

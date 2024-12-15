@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventRegistrationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RallyEventController;
 use App\Http\Middleware\denyClubAdmin;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,8 @@ Route::middleware([isClubAdmin::class])->group(function () {
     Route::put('club-dashboard/event/{event}/update', [ClubDashboardController::class, 'edit_event'])->name('club.edit-event.edit');
     Route::post('club-dashboard/create-event/create', [ClubDashboardController::class, 'create_event'])->name('club.create-event.create');
     Route::delete('club-dashboard/event/{event}/delete', [ClubDashboardController::class, 'delete_event'])->name('club.delete-event');
+
+    Route::put('club-dashboard/event/{event}/{participiant}', [RallyEventController::class, 'edit_points'])->name('club.edit-points');
 });
 
 
