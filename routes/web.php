@@ -8,6 +8,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\isClubAdmin;
+use App\Http\Controllers\CarController;
+
 
 Route::get('/', [LandingController::class, 'index'],)->name('landing.index');
 Route::get('filter', [LandingController::class, 'filter'],)->name('landing.filter');
@@ -43,9 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/profile/car', [ProfileController::class, 'storeCar'])
-     ->name('profile.car.store')
-     ->middleware(['auth']);
+    Route::post('/profile/car', [CarController::class, 'store'])->name('profile.car.store');
+    Route::put('/profile/car', [CarController::class, 'update'])->name('profile.car.update');
+    Route::delete('/profile/car', [CarController::class, 'destroy'])->name('profile.car.destroy');
 });
 
 
